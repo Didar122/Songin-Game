@@ -6,6 +6,7 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="apple-mobile-web-app-title" content="سۆنگ ئین گەیم">
+  <meta name="theme-color" content="#0f0f1e">
   <link rel="apple-touch-icon" href="icon.png">
   <title>سۆنگ ئین گەیم</title>
   <script src="https://cdn.tailwindcss.com/3.4.17"></script>
@@ -34,12 +35,6 @@
       }
     }
   </script>
-  <script>
-    // Prevent body scrolling in PWA mode
-    document.body.style.position = 'fixed';
-    document.body.style.width = '100%';
-    document.body.style.height = '100%';
-  </script>
   <style>
     * {
       -webkit-tap-highlight-color: transparent;
@@ -49,19 +44,17 @@
       touch-action: manipulation;
     }
     html {
-      height: 100%;
+      height: 100vh;
       height: 100dvh;
       width: 100%;
       overflow: hidden;
       margin: 0;
       padding: 0;
       -webkit-user-select: none;
-      -webkit-text-size-adjust: 100%;
-      background: linear-gradient(135deg, #0f0f1e 0%, #1a0a2e 100%);
     }
     
     body {
-      height: 100%;
+      height: 100vh;
       height: 100dvh;
       width: 100%;
       margin: 0;
@@ -75,31 +68,10 @@
       bottom: 0;
       background: linear-gradient(135deg, #0f0f1e 0%, #1a0a2e 100%);
       -webkit-user-select: none;
-      -webkit-touch-callout: none;
-    }
-    
-    /* Prevent white keyboard background from showing */
-    input, textarea {
-      -webkit-user-select: text;
-      user-select: text;
-      background-color: rgba(20, 20, 40, 0.8) !important;
-      color: white !important;
-      -webkit-text-fill-color: white !important;
-    }
-    
-    input::placeholder, textarea::placeholder {
-      color: rgba(255, 255, 255, 0.5) !important;
-      -webkit-text-fill-color: rgba(255, 255, 255, 0.5) !important;
-    }
-    
-    input:focus, textarea:focus {
-      background-color: rgba(20, 20, 40, 0.95) !important;
-      outline: none;
-      border-color: rgba(168, 85, 247, 0.5) !important;
     }
     
     .safe-area-top { padding-top: env(safe-area-inset-top, 20px); }
-    .safe-area-bottom { padding-bottom: 0 !important; }
+    .safe-area-bottom { padding-bottom: 0; }
     .safe-area-left { padding-left: env(safe-area-inset-left, 0); }
     .safe-area-right { padding-right: env(safe-area-inset-right, 0); }
     
@@ -759,40 +731,35 @@
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body { box-sizing: border-box; }
     #app { 
-      height: 100%;
+      height: 100vh;
       height: 100dvh;
       width: 100%;
+      max-height: 100vh;
+      max-height: 100dvh;
       overflow: hidden;
       display: flex;
       flex-direction: column;
       position: fixed;
-      inset: 0;
-      background: linear-gradient(135deg, #0f0f1e 0%, #1a0a2e 100%);
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
     }
     
     /* Prevent any element from extending beyond app bounds */
     #app > * {
-      max-height: 100%;
+      overflow: hidden;
     }
     
     /* Ensure screen containers fill the entire space */
     [id$="-screen"] {
       padding-bottom: 0 !important;
       margin-bottom: 0 !important;
-      max-height: 100dvh !important;
-    }
-    
-    /* Password screen specific */
-    #password-screen {
+      height: 100vh;
+      height: 100dvh;
+      max-height: 100vh;
       max-height: 100dvh;
-      overflow: hidden;
     }
-    
-    #password-screen > div {
-      max-height: 100dvh;
-      overflow: hidden;
-    }
-    
   </style>
  </head>
  <body class="h-full bg-app-bg font-arabic text-white overflow-hidden">
@@ -864,8 +831,8 @@
        </svg></button>
      </div>
     </header>
-    <main class="flex-1 overflow-y-auto scrollbar-hide px-4 pt-4">
-     <div class="grid grid-cols-1 sm:grid-cols-2 gap-5 auto-rows-max pb-4">
+    <main class="flex-1 overflow-y-auto scrollbar-hide px-4 py-4">
+     <div class="grid grid-cols-1 sm:grid-cols-2 gap-5 auto-rows-max">
       <!-- Truth or Dare Mode -->
       <div class="mode-card glass p-3 rounded-xl cursor-pointer btn-glass group transition-all" data-mode="truthdare" style="animation: bounce-scale 0.6s ease-out;">
        <div class="flex flex-col items-center text-center relative z-10">
@@ -945,7 +912,7 @@
       <h1 class="text-lg font-bold">تایبەتمەندیەکان</h1>
      </div>
     </header>
-    <main class="flex-1 overflow-y-auto scrollbar-hide px-4 pt-4">
+    <main class="flex-1 overflow-y-auto scrollbar-hide px-4 pb-4">
      <!-- Theme Selection -->
      <div class="p-5 rounded-xl glass mb-4">
       <h3 class="font-bold mb-4">🎨 ڕەنگ</h3>
@@ -1037,7 +1004,7 @@
       </div>
      </div>
     </header>
-    <main class="flex-1 overflow-y-auto scrollbar-hide px-4 pt-3 flex flex-col gap-3 items-center justify-center">
+    <main class="flex-1 overflow-y-auto scrollbar-hide px-4 py-3 flex flex-col gap-3 items-center justify-center">
      <!-- Welcome State -->
      <div id="truthdare-welcome" class="flex flex-col items-center justify-center gap-6 py-12 w-full">
       <div class="text-center space-y-4">
@@ -1078,7 +1045,7 @@
       </div>
      </div>
     </header>
-    <main class="flex-1 overflow-y-auto scrollbar-hide px-4 pt-6 flex flex-col gap-6 items-center justify-between">
+    <main class="flex-1 overflow-y-auto scrollbar-hide px-4 py-6 flex flex-col gap-6 items-center justify-between">
      <!-- Welcome State -->
      <div id="dicegame-welcome" class="flex flex-col items-center justify-center gap-6 py-12 w-full">
       <div class="text-center space-y-4">
@@ -1192,7 +1159,7 @@
       </div>
      </div>
     </header>
-    <main class="flex-1 overflow-y-auto scrollbar-hide px-4 pt-3 flex flex-col gap-3">
+    <main class="flex-1 overflow-y-auto scrollbar-hide px-4 py-3 flex flex-col gap-3">
      <!-- Welcome State -->
      <div id="sexpositions-welcome" class="flex flex-col items-center justify-center gap-6 py-12">
       <div class="text-center space-y-4">
