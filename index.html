@@ -35,21 +35,21 @@
     }
   </script>
   <script>
-    // iOS keyboard fix - reset viewport height when keyboard dismisses
+    // iOS keyboard fix - longer timeout for iOS keyboard animation
     function fixIOSViewport() {
+      const body = document.body;
       const app = document.getElementById('app');
       if (!app) return;
       
-      // Get current viewport height
-      const currentHeight = window.innerHeight;
-      app.style.height = currentHeight + 'px';
-      app.style.maxHeight = currentHeight + 'px';
+      // Force recalculation
+      body.style.height = window.innerHeight + 'px';
+      app.style.height = window.innerHeight + 'px';
       
-      // Reset after a short delay
+      // Reset after iOS keyboard animation completes (300-500ms)
       setTimeout(() => {
+        body.style.height = '';
         app.style.height = '';
-        app.style.maxHeight = '';
-      }, 100);
+      }, 600);
     }
     
     // Listen for keyboard events
@@ -57,7 +57,7 @@
       window.visualViewport.addEventListener('resize', fixIOSViewport);
     }
     
-    // Also listen for focus/blur on inputs
+    // Listen for input focus/blur
     document.addEventListener('focus', fixIOSViewport, true);
     document.addEventListener('blur', fixIOSViewport, true);
   </script>
@@ -88,11 +88,6 @@
       padding: 0;
       overflow: hidden;
       overscroll-behavior: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
       background: linear-gradient(135deg, #0f0f1e 0%, #1a0a2e 100%);
       -webkit-user-select: none;
       -webkit-touch-callout: none;
@@ -105,7 +100,7 @@
     }
     
     .safe-area-top { padding-top: env(safe-area-inset-top, 20px); }
-    .safe-area-bottom { padding-bottom: 0; }
+    .safe-area-bottom { padding-bottom: env(safe-area-inset-bottom, 0); }
     .safe-area-left { padding-left: env(safe-area-inset-left, 0); }
     .safe-area-right { padding-right: env(safe-area-inset-right, 0); }
     
@@ -768,8 +763,6 @@
       height: 100%;
       height: 100dvh;
       width: 100%;
-      max-height: 100%;
-      max-height: 100dvh;
       overflow: hidden;
       display: flex;
       flex-direction: column;
@@ -782,7 +775,7 @@
     
     /* Prevent any element from extending beyond app bounds */
     #app > * {
-      overflow: hidden;
+      max-height: 100%;
     }
     
     /* Ensure screen containers fill the entire space */
@@ -911,7 +904,7 @@
       </div>
      </div>
     </main><!-- Progress Bar at Bottom -->
-    <div class="px-4 py-3 pb-2 bg-gradient-to-t from-app-bg to-transparent">
+    <div class="px-4 py-3 pb-2 bg-gradient-to-t from-app-bg to-transparent safe-area-bottom">
      <div class="glass p-4 rounded-2xl border border-accent-rose/20 shadow-lg" style="background: rgba(255, 22, 84, 0.05); backdrop-filter: blur(20px);">
       <div class="flex items-center justify-between mb-3">
        <div class="flex items-center gap-4 flex-1">
