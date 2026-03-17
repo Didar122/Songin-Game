@@ -35,31 +35,49 @@
     }
   </script>
   <script>
-    // iOS keyboard fix - longer timeout for iOS keyboard animation
-    function fixIOSViewport() {
+    // iOS keyboard fix - continuously ensure #app covers viewport
+    function ensureViewportCovered() {
       const body = document.body;
       const app = document.getElementById('app');
-      if (!app) return;
+      if (!body || !app) return;
       
-      // Force recalculation
-      body.style.height = window.innerHeight + 'px';
-      app.style.height = window.innerHeight + 'px';
-      
-      // Reset after iOS keyboard animation completes (300-500ms)
-      setTimeout(() => {
-        body.style.height = '';
-        app.style.height = '';
-      }, 600);
+      // Always set to match current viewport
+      const vh = window.innerHeight;
+      body.style.minHeight = vh + 'px';
+      app.style.minHeight = vh + 'px';
     }
     
-    // Listen for keyboard events
+    // Call immediately
+    ensureViewportCovered();
+    
+    // Call on all viewport events
+    window.addEventListener('load', ensureViewportCovered);
+    window.addEventListener('resize', ensureViewportCovered);
+    window.addEventListener('orientationchange', ensureViewportCovered);
+    window.addEventListener('keyboardDidShow', ensureViewportCovered);
+    window.addEventListener('keyboardDidHide', ensureViewportCovered);
+    
+    // Watch visualViewport
     if (window.visualViewport) {
-      window.visualViewport.addEventListener('resize', fixIOSViewport);
+      window.visualViewport.addEventListener('resize', ensureViewportCovered);
+      window.visualViewport.addEventListener('scroll', ensureViewportCovered);
     }
     
-    // Listen for input focus/blur
-    document.addEventListener('focus', fixIOSViewport, true);
-    document.addEventListener('blur', fixIOSViewport, true);
+    // Watch for input interactions
+    document.addEventListener('focusin', ensureViewportCovered);
+    document.addEventListener('focusout', ensureViewportCovered);
+    
+    // Use ResizeObserver to catch any DOM changes
+    try {
+      const observer = new ResizeObserver(ensureViewportCovered);
+      observer.observe(document.body);
+      observer.observe(document.documentElement);
+    } catch (e) {
+      // ResizeObserver not supported
+    }
+    
+    // Fallback: check every 100ms
+    setInterval(ensureViewportCovered, 100);
   </script>
   <style>
     * {
@@ -88,6 +106,11 @@
       padding: 0;
       overflow: hidden;
       overscroll-behavior: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
       background: linear-gradient(135deg, #0f0f1e 0%, #1a0a2e 100%);
       -webkit-user-select: none;
       -webkit-touch-callout: none;
@@ -767,10 +790,8 @@
       display: flex;
       flex-direction: column;
       position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
+      inset: 0;
+      background: linear-gradient(135deg, #0f0f1e 0%, #1a0a2e 100%);
     }
     
     /* Prevent any element from extending beyond app bounds */
@@ -904,7 +925,7 @@
       </div>
      </div>
     </main><!-- Progress Bar at Bottom -->
-    <div class="px-4 py-3 pb-2 bg-gradient-to-t from-app-bg to-transparent safe-area-bottom">
+    <div class="px-4 py-3 pb-2 bg-gradient-to-t from-app-bg to-transparent">
      <div class="glass p-4 rounded-2xl border border-accent-rose/20 shadow-lg" style="background: rgba(255, 22, 84, 0.05); backdrop-filter: blur(20px);">
       <div class="flex items-center justify-between mb-3">
        <div class="flex items-center gap-4 flex-1">
