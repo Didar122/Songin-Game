@@ -34,6 +34,33 @@
       }
     }
   </script>
+  <script>
+    // iOS keyboard fix - reset viewport height when keyboard dismisses
+    function fixIOSViewport() {
+      const app = document.getElementById('app');
+      if (!app) return;
+      
+      // Get current viewport height
+      const currentHeight = window.innerHeight;
+      app.style.height = currentHeight + 'px';
+      app.style.maxHeight = currentHeight + 'px';
+      
+      // Reset after a short delay
+      setTimeout(() => {
+        app.style.height = '';
+        app.style.maxHeight = '';
+      }, 100);
+    }
+    
+    // Listen for keyboard events
+    if (window.visualViewport) {
+      window.visualViewport.addEventListener('resize', fixIOSViewport);
+    }
+    
+    // Also listen for focus/blur on inputs
+    document.addEventListener('focus', fixIOSViewport, true);
+    document.addEventListener('blur', fixIOSViewport, true);
+  </script>
   <style>
     * {
       -webkit-tap-highlight-color: transparent;
