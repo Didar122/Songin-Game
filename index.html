@@ -35,27 +35,10 @@
     }
   </script>
   <script>
-    // iOS keyboard fix - reset scroll when keyboard closes
-    document.addEventListener('focusout', (e) => {
-      if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') {
-        // Small delay to let keyboard animation complete
-        setTimeout(() => {
-          // Find scrollable container and reset scroll
-          const activeScreen = document.querySelector('[id$="-screen"]:not(.hidden)');
-          if (activeScreen) {
-            const mainElements = activeScreen.querySelectorAll('main, [class*="overflow-y"]');
-            mainElements.forEach(el => {
-              if (el.scrollTop > 0) {
-                el.scrollTop = 0;
-              }
-            });
-          }
-          
-          // Force repaint
-          document.body.offsetHeight;
-        }, 300);
-      }
-    });
+    // Prevent body scrolling in PWA mode
+    document.body.style.position = 'fixed';
+    document.body.style.width = '100%';
+    document.body.style.height = '100%';
   </script>
   <style>
     * {
@@ -75,7 +58,6 @@
       -webkit-user-select: none;
       -webkit-text-size-adjust: 100%;
       background: linear-gradient(135deg, #0f0f1e 0%, #1a0a2e 100%);
-      background-attachment: fixed;
     }
     
     body {
@@ -94,18 +76,26 @@
       background: linear-gradient(135deg, #0f0f1e 0%, #1a0a2e 100%);
       -webkit-user-select: none;
       -webkit-touch-callout: none;
-      background-attachment: fixed;
     }
     
     /* Prevent white keyboard background from showing */
     input, textarea {
       -webkit-user-select: text;
       user-select: text;
-      background-color: rgba(255, 255, 255, 0.1) !important;
+      background-color: rgba(20, 20, 40, 0.8) !important;
+      color: white !important;
+      -webkit-text-fill-color: white !important;
+    }
+    
+    input::placeholder, textarea::placeholder {
+      color: rgba(255, 255, 255, 0.5) !important;
+      -webkit-text-fill-color: rgba(255, 255, 255, 0.5) !important;
     }
     
     input:focus, textarea:focus {
-      background-color: rgba(255, 255, 255, 0.15) !important;
+      background-color: rgba(20, 20, 40, 0.95) !important;
+      outline: none;
+      border-color: rgba(168, 85, 247, 0.5) !important;
     }
     
     .safe-area-top { padding-top: env(safe-area-inset-top, 20px); }
@@ -789,6 +779,18 @@
     [id$="-screen"] {
       padding-bottom: 0 !important;
       margin-bottom: 0 !important;
+      max-height: 100dvh !important;
+    }
+    
+    /* Password screen specific */
+    #password-screen {
+      max-height: 100dvh;
+      overflow: hidden;
+    }
+    
+    #password-screen > div {
+      max-height: 100dvh;
+      overflow: hidden;
     }
     
   </style>
