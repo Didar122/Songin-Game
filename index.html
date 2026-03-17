@@ -43,15 +43,18 @@
       touch-action: manipulation;
     }
     html {
+      height: 100%;
       height: 100dvh;
       width: 100%;
       overflow: hidden;
       margin: 0;
       padding: 0;
       -webkit-user-select: none;
+      -webkit-text-size-adjust: 100%;
     }
     
     body {
+      height: 100%;
       height: 100dvh;
       width: 100%;
       margin: 0;
@@ -66,19 +69,12 @@
       background: linear-gradient(135deg, #0f0f1e 0%, #1a0a2e 100%);
       -webkit-user-select: none;
       -webkit-touch-callout: none;
-      -webkit-user-select: none;
     }
     
     /* iOS keyboard fix */
     input, textarea {
-      position: relative;
-      z-index: 100;
       -webkit-user-select: text;
       user-select: text;
-    }
-    
-    input:focus, textarea:focus {
-      resize: none;
     }
     
     .safe-area-top { padding-top: env(safe-area-inset-top, 20px); }
@@ -742,8 +738,10 @@
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body { box-sizing: border-box; }
     #app { 
+      height: 100%;
       height: 100dvh;
       width: 100%;
+      max-height: 100%;
       max-height: 100dvh;
       overflow: hidden;
       display: flex;
@@ -764,95 +762,8 @@
     [id$="-screen"] {
       padding-bottom: 0 !important;
       margin-bottom: 0 !important;
-      height: 100dvh;
-      max-height: 100dvh;
     }
     
-    /* Home screen flexbox layout */
-    #home-screen {
-      display: flex;
-      flex-direction: column;
-    }
-    
-    #home-screen header {
-      flex-shrink: 0;
-      flex-grow: 0;
-    }
-    
-    #home-screen main {
-      flex: 1;
-      overflow-y: auto;
-      -webkit-overflow-scrolling: touch;
-    }
-    
-    /* Progress bar at bottom - prevent it from creating gaps */
-    #home-screen > div:last-child {
-      flex-shrink: 0;
-      flex-grow: 0;
-      min-height: fit-content;
-    }
-    
-    /* Password screen fix */
-    #password-screen {
-      display: flex;
-      flex-direction: column;
-    }
-    
-    #password-screen > div {
-      flex-shrink: 0;
-    }
-    
-    /* Settings screen fix */
-    #settings-screen {
-      display: flex;
-      flex-direction: column;
-    }
-    
-    #settings-screen header {
-      flex-shrink: 0;
-      flex-grow: 0;
-    }
-    
-    #settings-screen main {
-      flex: 1;
-      overflow-y: auto;
-      -webkit-overflow-scrolling: touch;
-    }
-    
-    /* Gender screen fix */
-    #gender-screen {
-      display: flex;
-      flex-direction: column;
-    }
-    
-    #gender-screen header {
-      flex-shrink: 0;
-      flex-grow: 0;
-    }
-    
-    #gender-screen main {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-    }
-    
-    /* Truth or Dare screen fix */
-    #truthdare-screen {
-      display: flex;
-      flex-direction: column;
-    }
-    
-    #truthdare-screen header {
-      flex-shrink: 0;
-      flex-grow: 0;
-    }
-    
-    #truthdare-screen main {
-      flex: 1;
-      overflow-y: auto;
-      -webkit-overflow-scrolling: touch;
-    }
   </style>
  </head>
  <body class="h-full bg-app-bg font-arabic text-white overflow-hidden">
