@@ -49,7 +49,6 @@
       overflow: hidden;
       margin: 0;
       padding: 0;
-      background: linear-gradient(135deg, #0f0f1e 0%, #1a0a2e 100%);
       -webkit-user-select: none;
     }
     
@@ -315,6 +314,14 @@
       background: linear-gradient(135deg, #0f0f1e 0%, #1a0a2e 100%);
       color: white;
     }
+    
+    #app {
+      background: inherit;
+    }
+
+    body.theme-dark #app {
+      background: linear-gradient(135deg, #0f0f1e 0%, #1a0a2e 100%);
+    }
 
     body.theme-dark .glass {
       background: rgba(255, 255, 255, 0.08);
@@ -330,6 +337,10 @@
     body.theme-white {
       background: linear-gradient(135deg, #f8f9fa 0%, #e8ecf1 100%);
       color: #1a1a2e;
+    }
+    
+    body.theme-white #app {
+      background: linear-gradient(135deg, #f8f9fa 0%, #e8ecf1 100%);
     }
 
     body.theme-white .glass {
@@ -396,6 +407,10 @@
     body.theme-romantic {
       background: linear-gradient(135deg, #1a0f0f 0%, #2d1414 100%);
       color: white;
+    }
+    
+    body.theme-romantic #app {
+      background: linear-gradient(135deg, #1a0f0f 0%, #2d1414 100%);
     }
 
     body.theme-romantic .glass {
@@ -556,6 +571,7 @@
       perspective: 1000px;
       position: relative;
       border: 2px solid rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
       transition: all 0.3s ease;
     }
 
@@ -570,7 +586,7 @@
       position: absolute;
       inset: 0;
       background: linear-gradient(135deg, rgba(255, 22, 84, 0.2), rgba(168, 85, 247, 0.2));
-      border-radius: 20px;
+      border-radius: 12px;
       opacity: 0;
       transition: opacity 0.3s;
       pointer-events: none;
@@ -714,7 +730,6 @@
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body { box-sizing: border-box; }
     #app { 
-      background: linear-gradient(135deg, #0f0f1e 0%, #1a0a2e 100%);
       height: 100vh;
       height: 100dvh;
       width: 100%;
