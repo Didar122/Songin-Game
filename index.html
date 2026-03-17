@@ -771,7 +771,34 @@
     </div>
     <h1 class="text-4xl font-bold text-white animate-fade-in mb-2">سۆنگ ئین گەیم</h1>
     <p class="text-lg text-accent-cyan animate-fade-in">یاری هاوسەران ❤️</p>
-   </div><!-- PASSWORD SCREEN -->
+   </div>
+
+   <!-- CONGRATULATIONS SPLASH SCREEN -->
+   <div id="congratulations-screen" class="hidden fixed inset-0 bg-app-bg z-50 flex flex-col items-center justify-center safe-area-top overflow-hidden">
+    <div class="absolute w-full h-full flex flex-col items-center justify-center pointer-events-none">
+     <!-- Fireworks effect elements -->
+     <div class="absolute text-6xl animate-float-gentle" style="left: 10%; top: 20%; animation-delay: 0s;">🎉</div>
+     <div class="absolute text-6xl animate-float-gentle" style="right: 10%; top: 20%; animation-delay: 0.3s;">🎊</div>
+     <div class="absolute text-5xl animate-float-gentle" style="left: 15%; bottom: 35%; animation-delay: 0.6s;">✨</div>
+     <div class="absolute text-5xl animate-float-gentle" style="right: 15%; bottom: 35%; animation-delay: 0.9s;">🌟</div>
+     <div class="absolute text-6xl animate-float-gentle" style="left: 20%; bottom: 15%; animation-delay: 1.2s;">💎</div>
+     <div class="absolute text-6xl animate-float-gentle" style="right: 20%; bottom: 15%; animation-delay: 1.5s;">👑</div>
+    </div>
+
+    <div class="flex flex-col items-center gap-6 relative z-10">
+     <div class="animate-pulse-glow">
+      <div class="w-40 h-40 rounded-full glass flex items-center justify-center animate-glow-pulse">
+       <span class="text-8xl">🏆</span>
+      </div>
+     </div>
+     <h1 class="text-5xl font-bold text-center text-white animate-fade-in" style="animation-delay: 0.3s;">پیرۆزە!</h1>
+     <h2 class="text-4xl font-bold text-center bg-gradient-to-r from-accent-rose to-accent-violet bg-clip-text text-transparent animate-fade-in" style="animation-delay: 0.5s;">ئێستا تۆ شارەزایت!</h2>
+     <p class="text-xl text-accent-cyan text-center max-w-xs animate-fade-in" style="animation-delay: 0.7s;">بەسەرکەوتووی گەیشتیت بە پلەی شارەزا! 👑</p>
+     <button id="congratulations-continue-btn" class="mt-8 py-4 px-8 rounded-2xl bg-gradient-to-r from-accent-rose to-accent-violet text-white font-bold btn-glass text-lg shadow-lg animate-bounce-scale">وەک شارەزایەک بەردەوامبە</button>
+    </div>
+   </div>
+
+   <!-- PASSWORD SCREEN -->
    <div id="password-screen" class="hidden h-full w-full flex flex-col items-center justify-center safe-area-top animate-fade-in">
     <div class="flex flex-col items-center gap-8 w-full px-6 max-w-sm">
      <div class="animate-bounce-scale">
@@ -1079,8 +1106,8 @@
      <!-- Start Round State -->
      <div id="wordchallenge-start-state" class="flex flex-col items-center justify-center gap-8 w-full">
       <div class="text-5xl">📝</div>
-      <p class="text-xl font-bold text-center text-gray-200">دۆزینەوەی ووشە بە زانینی پیتی سەرەتا و کۆتایی</p>
-      <p class="text-sm text-gray-400 text-center max-w-xs">بۆ دەستپێکردن دەست بنێ بە دوگمەی دەستپێکردندا</p>
+      <p class="text-xl font-bold text-center text-gray-200">دۆزینەوەی ووشەی جیاواز بە تەنها زانینی پیتی سەرەتا و کۆتایی </p>
+      <p class="text-sm text-gray-400 text-center max-w-xs">هەرکەسێکتان توانی زووتر وشەیەک بدۆزێتەوە کە بەو دوو پیتە دەستپێبکات و کۆتای بێت کە بۆی دیاری دەکرێت، شانسی بردنەوەی کارێکی دەبێت لەلایەن هاوبەشەکەیەوە، بۆیە پاش بردنەوە دەبێت ڕەگەزی بەرامبەر دیاری بکرێت</p>
       <button id="wordchallenge-new-round-btn" class="w-full max-w-xs py-4 rounded-2xl bg-gradient-to-r from-orange-500 to-accent-rose text-white font-bold btn-glass text-lg shadow-lg">🔔 دەستپێکردن</button>
      </div>
 
@@ -1108,7 +1135,7 @@
 
       <!-- Gender Buttons (Hidden until timer ends) -->
       <div id="wordchallenge-gender-buttons" class="hidden flex flex-col items-center gap-4 w-full max-w-xs">
-       <p class="text-sm text-gray-300 font-bold">براوەی ئەم خولە دیاریکە یاخود بڕۆ بۆ خولی داهاتوو</p>
+       <p class="text-sm text-gray-300 font-bold">براوەی ئەم خولە ڕەگەزی بەرامبەر دیاریکە، یاخود ئەگەر ووشە نەدۆزرایەوە بڕۆ بۆ خولی داهاتوو</p>
        <div class="flex gap-3 w-full">
         <button id="wordchallenge-gender-girl-btn" class="flex-1 py-3 rounded-xl bg-gradient-to-r from-accent-rose to-pink-500 text-white font-bold btn-glass transition-all">♀️ مێ</button>
         <button id="wordchallenge-gender-boy-btn" class="flex-1 py-3 rounded-xl bg-gradient-to-r from-accent-violet to-blue-500 text-white font-bold btn-glass transition-all">♂️ نێر</button>
@@ -1845,8 +1872,8 @@
       diceRolling: false,
     };
 
-    // Level thresholds for score system
-    const LEVEL_THRESHOLDS = [100, 250, 450, 700, 1000, 1350, 1750, 2200, 2700, 3250];
+    // Level thresholds for score system - 20 levels total
+    const LEVEL_THRESHOLDS = [100, 250, 450, 700, 1000, 1350, 1750, 2200, 2700, 3250, 3900, 4650, 5450, 6300, 7200, 8150, 9150, 10200, 11300, 12450];
     
     function calculateLevel() {
       let level = 1;
@@ -1865,20 +1892,50 @@
       appState.playerScore = (appState.playerScore || 0) + points;
       localStorage.setItem('gamePlayerScore', appState.playerScore);
       appState.currentLevel = calculateLevel();
-      if (calculateLevel() > previousLevel) {
-        showLevelUpAnimation();
+      const newLevel = calculateLevel();
+      if (newLevel > previousLevel) {
+        // Check if reached max level
+        if (newLevel > LEVEL_THRESHOLDS.length) {
+          showCongratulationsScreen();
+        } else {
+          showLevelUpAnimation();
+        }
       }
     }
 
     function showLevelUpAnimation() {
       const levelDisplay = document.getElementById('stats-level');
+      const homeLevelDisplay = document.getElementById('home-current-level');
       if (levelDisplay) {
+        const level = calculateLevel();
+        if (level > LEVEL_THRESHOLDS.length) {
+          levelDisplay.textContent = 'شارەزا';
+        } else {
+          levelDisplay.textContent = 'ئاست ' + level;
+        }
         levelDisplay.classList.add('animate-level-up');
         soundManager.playSuccess();
         setTimeout(() => {
           levelDisplay.classList.remove('animate-level-up');
         }, 600);
       }
+      if (homeLevelDisplay) {
+        const level = calculateLevel();
+        if (level > LEVEL_THRESHOLDS.length) {
+          homeLevelDisplay.textContent = 'شارەزا';
+        } else {
+          homeLevelDisplay.textContent = level;
+        }
+      }
+    }
+
+    function showCongratulationsScreen() {
+      soundManager.playSuccess();
+      soundManager.playSuccess();
+      document.getElementById('congratulations-screen').classList.remove('hidden');
+      setTimeout(() => {
+        document.getElementById('congratulations-screen').classList.add('hidden');
+      }, 8000);
     }
 
     function getNextLevelThreshold() {
@@ -2015,9 +2072,23 @@
       const countEl = document.getElementById('home-completed-count');
       const levelEl = document.getElementById('home-current-level');
       const nextEl = document.getElementById('home-threshold-next');
+      const level = calculateLevel();
+      
       if (countEl) countEl.textContent = appState.playerScore;
-      if (levelEl) levelEl.textContent = calculateLevel();
-      if (nextEl) nextEl.textContent = getNextLevelThreshold();
+      if (levelEl) {
+        if (level > LEVEL_THRESHOLDS.length) {
+          levelEl.textContent = 'شارەزا';
+        } else {
+          levelEl.textContent = level;
+        }
+      }
+      if (nextEl) {
+        if (level > LEVEL_THRESHOLDS.length) {
+          nextEl.textContent = '∞';
+        } else {
+          nextEl.textContent = getNextLevelThreshold();
+        }
+      }
     }
 
     function updateHomeProgress() {
@@ -3046,6 +3117,13 @@
         if (e.key === 'Enter') checkPassword();
       });
 
+      // Congratulations screen button
+      document.getElementById('congratulations-continue-btn').addEventListener('click', () => {
+        document.getElementById('congratulations-screen').classList.add('hidden');
+        showScreen('home-screen');
+        soundManager.playClick();
+      });
+
       document.getElementById('settings-btn').addEventListener('click', () => {
         soundManager.playClick();
         showScreen('settings-screen');
@@ -3209,12 +3287,22 @@
 
       document.getElementById('stats-completed').textContent = appState.playerScore;
       if (document.getElementById('stats-level')) {
-        document.getElementById('stats-level').textContent = calculateLevel();
+        const level = calculateLevel();
+        if (level > LEVEL_THRESHOLDS.length) {
+          document.getElementById('stats-level').textContent = 'شارەزا';
+        } else {
+          document.getElementById('stats-level').textContent = 'ئاست ' + level;
+        }
       }
       setInterval(() => {
         document.getElementById('stats-completed').textContent = appState.playerScore;
         if (document.getElementById('stats-level')) {
-          document.getElementById('stats-level').textContent = calculateLevel();
+          const level = calculateLevel();
+          if (level > LEVEL_THRESHOLDS.length) {
+            document.getElementById('stats-level').textContent = 'شارەزا';
+          } else {
+            document.getElementById('stats-level').textContent = 'ئاست ' + level;
+          }
         }
       }, 500);
 
